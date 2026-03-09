@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/regeneration-brief.schema.json",
+  "title": "Regeneration Brief",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project_info": {
+      "allOf": [
+        { "$ref": "./common.schema.json#/$defs/projectEpisode" },
+        {
+          "type": "object",
+          "properties": {
+            "source_qc_report": { "type": "string" },
+            "source_generation_brief": { "type": "string" },
+            "generated_at": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "retry_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "keep": { "type": "integer", "minimum": 0 },
+        "patch": { "type": "integer", "minimum": 0 },
+        "partial_redo": { "type": "integer", "minimum": 0 },
+        "full_redo": { "type": "integer", "minimum": 0 },
+        "total_retry_batches": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "retry_batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "batch_id": { "$ref": "./common.schema.json#/$defs/batchId" },
+          "strategy": { "$ref": "./common.schema.json#/$defs/regenAction" },
+          "shots": {
+            "type": "array",
+            "items": { "$ref": "./common.schema.json#/$defs/shotId" }
+          },
+          "shared_reference_shot": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "shared_seed_group": { "type": "string" },
+          "priority": { "$ref": "./common.schema.json#/$defs/priority" },
+          "reason": { "type": "string" }
+        },
+        "required": ["batch_id", "strategy", "shots", "priority"]
+      }
+    },
+    "revised_shot_specs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_ref": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "action": { "$ref": "./common.schema.json#/$defs/regenAction" },
+          "failure_type": {
+            "type": "array",
+            "items": { "$ref": "./common.schema.json#/$defs/failureType" }
+          },
+          "reference_shot": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "seed_group": { "type": "string" },
+          "gen_mode_override": { "type": "string" },
+          "prompt_delta": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "add": { "$ref": "./common.schema.json#/$defs/stringList" },
+              "remove": { "$ref": "./common.schema.json#/$defs/stringList" },
+              "emphasize": { "$ref": "./common.schema.json#/$defs/stringList" }
+            }
+          },
+          "param_overrides": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "size": { "type": "string" },
+              "style_weight": {
+                "oneOf": [{ "type": "number", "minimum": 0, "maximum": 1 }, { "type": "null" }]
+              },
+              "seed": {
+                "oneOf": [{ "type": "integer" }, { "type": "null" }]
+              },
+              "reference_strength": {
+                "oneOf": [{ "type": "number", "minimum": 0, "maximum": 1 }, { "type": "null" }]
+              }
+            }
+          },
+          "operator_note": { "type": "string" }
+        },
+        "required": ["shot_ref", "action"]
+      }
+    },
+    "keep_as_is_list": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_id": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "reason": { "type": "string" }
+        },
+        "required": ["shot_id", "reason"]
+      }
+    }
+  },
+  "required": ["project_info", "retry_batches", "revised_shot_specs"]
+}

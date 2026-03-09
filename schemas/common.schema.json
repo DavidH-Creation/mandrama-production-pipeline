@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/common.schema.json",
+  "title": "Common Definitions",
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "score0to5": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "score1to5": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["high", "medium", "low"]
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["minor", "major", "critical"]
+    },
+    "consistencyVerdict": {
+      "type": "string",
+      "enum": ["stable", "watch", "broken"]
+    },
+    "qcVerdict": {
+      "type": "string",
+      "enum": ["Pass", "Adjust", "Redo"]
+    },
+    "regenAction": {
+      "type": "string",
+      "enum": ["keep", "patch", "partial_redo", "full_redo"]
+    },
+    "keepPatchRedo": {
+      "type": "string",
+      "enum": ["keep", "patch", "redo"]
+    },
+    "driftType": {
+      "type": "string",
+      "enum": ["identity", "costume", "prop", "environment", "style"]
+    },
+    "failureType": {
+      "type": "string",
+      "enum": ["identity", "composition", "emotion", "technical", "motion", "continuity", "narrative"]
+    },
+    "shotId": {
+      "type": "string",
+      "pattern": "^S[0-9]{2,3}-[0-9]{3}$"
+    },
+    "sceneId": {
+      "type": "string",
+      "pattern": "^S[0-9]{2,3}$"
+    },
+    "locationId": {
+      "type": "string",
+      "pattern": "^L[0-9]{2,3}$"
+    },
+    "characterId": {
+      "type": "string",
+      "pattern": "^C[0-9]{2,3}$"
+    },
+    "outfitId": {
+      "type": "string",
+      "pattern": "^C[0-9]{2,3}-O[0-9]{1,2}$"
+    },
+    "propId": {
+      "type": "string",
+      "pattern": "^P[0-9]{2,3}$"
+    },
+    "groupId": {
+      "type": "string",
+      "pattern": "^G[0-9]{2,3}$"
+    },
+    "batchId": {
+      "type": "string",
+      "pattern": "^(Batch|R)[-_]?[A-Za-z0-9]+$"
+    },
+    "projectEpisode": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "project_name": { "$ref": "#/$defs/nonEmptyString" },
+        "episode": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["project_name", "episode"]
+    }
+  }
+}

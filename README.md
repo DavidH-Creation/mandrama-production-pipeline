@@ -19,6 +19,7 @@ This repo is a **production workflow skill pack**, not a single monolithic skill
 - Dedicated references and templates for each production stage
 - A Jimeng-specific prompt adapter while keeping upstream planning model-agnostic
 - A closed repair loop for continuity drift and targeted regeneration
+- JSON Schema definitions for the shared pipeline artifacts
 
 ## Repo Structure
 
@@ -30,6 +31,7 @@ model-prompt-adapter-jimeng/
 consistency-keeper/
 shot-qc-and-edit-assembler/
 regeneration-router/
+schemas/
 PIPELINE.md
 ```
 
@@ -38,6 +40,8 @@ Each skill folder contains:
 - `SKILL.md` for trigger and workflow instructions
 - `references/` for deeper guidance loaded only when needed
 - `templates/` for standardized outputs
+
+The repo also includes `schemas/` with JSON Schema files for machine-readable validation of the main intermediate artifacts.
 
 ## Installation
 
@@ -70,7 +74,7 @@ Run the skills in this order:
 
 Use `consistency-keeper` and `shot-qc-and-edit-assembler` as the review layer, then run `regeneration-router` when you need a targeted second pass instead of rebuilding the whole episode.
 
-See [PIPELINE.md](PIPELINE.md) for the full pipeline overview and intermediate artifact map.
+See [PIPELINE.md](PIPELINE.md) for the full pipeline overview, intermediate artifact map, and schema list.
 
 ## Related Project
 

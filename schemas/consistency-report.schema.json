@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/consistency-report.schema.json",
+  "title": "Consistency Report",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project_info": {
+      "allOf": [
+        { "$ref": "./common.schema.json#/$defs/projectEpisode" },
+        {
+          "type": "object",
+          "properties": {
+            "review_scope": { "type": "string" },
+            "review_date": { "type": "string" }
+          },
+          "required": ["review_scope"]
+        }
+      ]
+    },
+    "overall_verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sequence_groups_reviewed": { "type": "integer", "minimum": 0 },
+        "stable_groups": { "type": "integer", "minimum": 0 },
+        "watch_groups": { "type": "integer", "minimum": 0 },
+        "broken_groups": { "type": "integer", "minimum": 0 },
+        "overall_status": { "$ref": "./common.schema.json#/$defs/consistencyVerdict" }
+      },
+      "required": ["overall_status"]
+    },
+    "priority_fix_queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "priority": { "$ref": "./common.schema.json#/$defs/priority" },
+          "group_id": { "$ref": "./common.schema.json#/$defs/groupId" },
+          "issue_type": { "$ref": "./common.schema.json#/$defs/driftType" },
+          "affected_shots": {
+            "type": "array",
+            "items": { "$ref": "./common.schema.json#/$defs/shotId" }
+          },
+          "recommended_action": { "$ref": "./common.schema.json#/$defs/keepPatchRedo" }
+        },
+        "required": ["priority", "group_id", "issue_type", "recommended_action"]
+      }
+    },
+    "sequence_groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "group_id": { "$ref": "./common.schema.json#/$defs/groupId" },
+          "scope": { "type": "string" },
+          "shots": {
+            "type": "array",
+            "items": { "$ref": "./common.schema.json#/$defs/shotId" }
+          },
+          "focus_subjects": { "$ref": "./common.schema.json#/$defs/stringList" },
+          "verdict": { "$ref": "./common.schema.json#/$defs/consistencyVerdict" },
+          "drift_summary": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "drift_type": { "$ref": "./common.schema.json#/$defs/driftType" },
+                "severity": { "$ref": "./common.schema.json#/$defs/severity" },
+                "description": { "type": "string" }
+              },
+              "required": ["drift_type", "severity"]
+            }
+          },
+          "repair_recommendation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "action": { "$ref": "./common.schema.json#/$defs/keepPatchRedo" },
+              "anchor_to_lock": { "$ref": "./common.schema.json#/$defs/stringList" },
+              "reference_shot": { "$ref": "./common.schema.json#/$defs/shotId" },
+              "notes": { "type": "string" }
+            },
+            "required": ["action"]
+          }
+        },
+        "required": ["group_id", "shots", "verdict"]
+      }
+    },
+    "shot_level_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_id": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "verdict": { "$ref": "./common.schema.json#/$defs/keepPatchRedo" },
+          "main_drift": { "$ref": "./common.schema.json#/$defs/driftType" },
+          "note": { "type": "string" }
+        },
+        "required": ["shot_id", "verdict"]
+      }
+    }
+  },
+  "required": ["project_info", "overall_verdict", "sequence_groups"]
+}

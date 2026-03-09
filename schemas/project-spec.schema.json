@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/project-spec.schema.json",
+  "title": "Project Spec",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project_name": { "$ref": "./common.schema.json#/$defs/nonEmptyString" },
+    "genre": { "type": "string" },
+    "logline": { "type": "string" },
+    "total_episodes": { "type": "integer", "minimum": 0 },
+    "episode_duration_sec": { "type": "integer", "minimum": 0 },
+    "primary_platform": { "type": "string" },
+    "secondary_platforms": { "$ref": "./common.schema.json#/$defs/stringList" },
+    "aspect_ratio": { "type": "string", "enum": ["9:16", "16:9", "1:1"] },
+    "resolution": { "type": "string", "pattern": "^[0-9]{3,5}x[0-9]{3,5}$" },
+    "safe_zone_notes": { "type": "string" },
+    "style_route": { "type": "string" },
+    "style_substyle": { "type": "string" },
+    "primary_palette": { "$ref": "./common.schema.json#/$defs/stringList" },
+    "secondary_palette": { "$ref": "./common.schema.json#/$defs/stringList" },
+    "lighting_style": { "type": "string" },
+    "texture": { "type": "string" },
+    "visual_keywords": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "target_age": { "type": "string" },
+    "target_gender": { "type": "string" },
+    "target_region": { "type": "string" },
+    "budget_level": { "type": "string", "enum": ["low", "medium", "high"] },
+    "turnaround": { "type": "string" },
+    "ai_pipeline": { "$ref": "./common.schema.json#/$defs/stringList" },
+    "decision_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "decision_item": { "type": "string" },
+          "selection": { "type": "string" },
+          "reason": { "type": "string" },
+          "rejected_options": { "$ref": "./common.schema.json#/$defs/stringList" }
+        },
+        "required": ["decision_item", "selection"]
+      }
+    },
+    "notes": { "type": "string" }
+  },
+  "required": [
+    "project_name",
+    "genre",
+    "logline",
+    "total_episodes",
+    "episode_duration_sec",
+    "primary_platform",
+    "aspect_ratio",
+    "resolution",
+    "style_route"
+  ]
+}

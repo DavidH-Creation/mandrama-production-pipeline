@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/canonical-prompts.schema.json",
+  "title": "Canonical Prompts",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "character_id": { "$ref": "./common.schema.json#/$defs/characterId" },
+          "name": { "type": "string" },
+          "core_prompt": { "$ref": "./common.schema.json#/$defs/nonEmptyString" },
+          "outfit_variants": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          },
+          "expression_variants": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "required": ["character_id", "core_prompt"]
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scene_id": { "$ref": "./common.schema.json#/$defs/locationId" },
+          "name": { "type": "string" },
+          "core_prompt": { "$ref": "./common.schema.json#/$defs/nonEmptyString" },
+          "time_variants": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "required": ["scene_id", "core_prompt"]
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "prop_id": { "$ref": "./common.schema.json#/$defs/propId" },
+          "name": { "type": "string" },
+          "core_prompt": { "$ref": "./common.schema.json#/$defs/nonEmptyString" },
+          "state_variants": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "required": ["prop_id", "core_prompt"]
+      }
+    },
+    "assembly_order_example": {
+      "$ref": "./common.schema.json#/$defs/stringList"
+    }
+  },
+  "required": ["characters", "scenes", "props"]
+}

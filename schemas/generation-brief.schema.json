@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/generation-brief.schema.json",
+  "title": "Generation Brief",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project_info": {
+      "allOf": [
+        { "$ref": "./common.schema.json#/$defs/projectEpisode" },
+        {
+          "type": "object",
+          "properties": {
+            "model_version": { "type": "string" },
+            "default_size": { "type": "string" },
+            "default_style_preset": { "type": "string" },
+            "global_negative_prompt": { "type": "string" }
+          },
+          "required": ["model_version"]
+        }
+      ]
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_ref": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "gen_mode": {
+            "type": "string",
+            "enum": ["text2img", "img2img", "text2video", "img2video"]
+          },
+          "prompt": { "$ref": "./common.schema.json#/$defs/nonEmptyString" },
+          "negative_prompt": { "type": "string" },
+          "params": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "size": { "type": "string" },
+              "style_weight": { "type": "number", "minimum": 0, "maximum": 1 },
+              "seed": {
+                "oneOf": [{ "type": "integer" }, { "type": "null" }]
+              },
+              "steps": { "type": "integer", "minimum": 0 },
+              "cfg_scale": { "type": "number", "minimum": 0 },
+              "reference_image": { "type": "string" },
+              "reference_strength": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "consistency": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "character_lock": {
+                "type": "array",
+                "items": { "$ref": "./common.schema.json#/$defs/characterId" }
+              },
+              "seed_group": { "type": "string" },
+              "reference_shot": { "$ref": "./common.schema.json#/$defs/shotId" }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "characters": {
+                "type": "array",
+                "items": { "$ref": "./common.schema.json#/$defs/characterId" }
+              },
+              "scene": { "$ref": "./common.schema.json#/$defs/locationId" },
+              "shot_type": { "type": "string" },
+              "key_elements": { "$ref": "./common.schema.json#/$defs/stringList" }
+            }
+          }
+        },
+        "required": ["shot_ref", "gen_mode", "prompt"]
+      }
+    },
+    "generation_batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "batch_id": { "$ref": "./common.schema.json#/$defs/batchId" },
+          "shots": {
+            "type": "array",
+            "items": { "$ref": "./common.schema.json#/$defs/shotId" }
+          },
+          "shared_control": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "required": ["batch_id", "shots"]
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_prompts": { "type": "integer", "minimum": 0 },
+        "text2img": { "type": "integer", "minimum": 0 },
+        "img2img": { "type": "integer", "minimum": 0 },
+        "text2video": { "type": "integer", "minimum": 0 },
+        "img2video": { "type": "integer", "minimum": 0 },
+        "character_lock_shots": { "type": "integer", "minimum": 0 },
+        "seed_groups": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "required": ["project_info", "shots"]
+}

@@ -55,6 +55,19 @@ Copy-Item format-style-planner, script-asset-breakdown, storyboard-shot-planner,
 | qc-report | skill 6 | skill 7 |
 | regeneration-brief | skill 7 | user / next generation pass |
 
+## JSON Schemas
+
+Machine-readable validation schemas live under [`schemas/`](schemas):
+
+- `project-spec.schema.json`
+- `asset-bible.schema.json`
+- `canonical-prompts.schema.json`
+- `shot-plan.schema.json`
+- `generation-brief.schema.json`
+- `consistency-report.schema.json`
+- `qc-report.schema.json`
+- `regeneration-brief.schema.json`
+
 ## Recommended Loop
 
 Use the main path for the first generation pass:

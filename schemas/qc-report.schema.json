@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/qc-report.schema.json",
+  "title": "QC Report",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "project_info": {
+      "allOf": [
+        { "$ref": "./common.schema.json#/$defs/projectEpisode" },
+        {
+          "type": "object",
+          "properties": {
+            "total_shots_reviewed": { "type": "integer", "minimum": 0 },
+            "review_date": { "type": "string" }
+          },
+          "required": ["total_shots_reviewed"]
+        }
+      ]
+    },
+    "qc_overview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_shots": { "type": "integer", "minimum": 0 },
+        "pass": { "type": "integer", "minimum": 0 },
+        "adjust": { "type": "integer", "minimum": 0 },
+        "redo": { "type": "integer", "minimum": 0 },
+        "pass_rate": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "issue_breakdown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "issue_type": { "$ref": "./common.schema.json#/$defs/failureType" },
+          "count": { "type": "integer", "minimum": 0 },
+          "ratio": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "required": ["issue_type", "count"]
+      }
+    },
+    "shot_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_ref": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "verdict": { "$ref": "./common.schema.json#/$defs/qcVerdict" },
+          "scores": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "character_consistency": { "$ref": "./common.schema.json#/$defs/score0to5" },
+              "composition_match": { "$ref": "./common.schema.json#/$defs/score0to5" },
+              "emotion_match": { "$ref": "./common.schema.json#/$defs/score0to5" },
+              "technical_quality": { "$ref": "./common.schema.json#/$defs/score0to5" },
+              "narrative_continuity": { "$ref": "./common.schema.json#/$defs/score0to5" }
+            },
+            "required": [
+              "character_consistency",
+              "composition_match",
+              "emotion_match",
+              "technical_quality",
+              "narrative_continuity"
+            ]
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "type": { "$ref": "./common.schema.json#/$defs/failureType" },
+                "severity": { "$ref": "./common.schema.json#/$defs/severity" },
+                "description": { "type": "string" }
+              },
+              "required": ["type", "severity"]
+            }
+          },
+          "fix_suggestion": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "action": { "type": "string" },
+              "prompt_adjustment": { "type": "string" },
+              "notes": { "type": "string" }
+            }
+          }
+        },
+        "required": ["shot_ref", "verdict", "scores"]
+      }
+    },
+    "regeneration_queue": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "shot_id": { "$ref": "./common.schema.json#/$defs/shotId" },
+          "main_issue": { "$ref": "./common.schema.json#/$defs/failureType" },
+          "fix_direction": { "type": "string" },
+          "priority": { "$ref": "./common.schema.json#/$defs/priority" }
+        },
+        "required": ["shot_id", "main_issue", "priority"]
+      }
+    }
+  },
+  "required": ["project_info", "shot_reviews"]
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DavidH-Creation/mandrama-production-pipeline/schemas/asset-bible.schema.json",
+  "title": "Asset Bible",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "character_id": { "$ref": "./common.schema.json#/$defs/characterId" },
+          "name": { "type": "string" },
+          "role": { "type": "string" },
+          "first_appearance": { "type": "string" },
+          "appearance": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "gender": { "type": "string" },
+              "age_apparent": { "type": "string" },
+              "height": { "type": "string" },
+              "build": { "type": "string" },
+              "face_shape": { "type": "string" },
+              "skin_tone": { "type": "string" },
+              "hair": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "style": { "type": "string" },
+                  "color": { "type": "string" },
+                  "length": { "type": "string" }
+                }
+              },
+              "eyes": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "shape": { "type": "string" },
+                  "color": { "type": "string" }
+                }
+              },
+              "distinguishing_features": { "$ref": "./common.schema.json#/$defs/stringList" }
+            }
+          },
+          "outfits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "outfit_id": { "$ref": "./common.schema.json#/$defs/outfitId" },
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "scenes_used": { "$ref": "./common.schema.json#/$defs/stringList" }
+              },
+              "required": ["outfit_id", "name"]
+            }
+          },
+          "expressions": { "$ref": "./common.schema.json#/$defs/stringList" },
+          "state_changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "episode": { "type": "integer", "minimum": 0 },
+                "scene": { "type": "string" },
+                "change": { "type": "string" }
+              }
+            }
+          }
+        },
+        "required": ["character_id", "name"]
+      }
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "scene_id": { "$ref": "./common.schema.json#/$defs/locationId" },
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "setting": { "type": "string" },
+          "environment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "time_of_day": { "type": "string" },
+              "weather": { "type": "string" },
+              "lighting": { "type": "string" },
+              "atmosphere": { "type": "string" }
+            }
+          },
+          "key_props": { "$ref": "./common.schema.json#/$defs/stringList" },
+          "background_elements": { "$ref": "./common.schema.json#/$defs/stringList" },
+          "state_changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "episode": { "type": "integer", "minimum": 0 },
+                "change": { "type": "string" }
+              }
+            }
+          }
+        },
+        "required": ["scene_id", "name"]
+      }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "prop_id": { "$ref": "./common.schema.json#/$defs/propId" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "owner": { "type": "string" },
+          "significance": { "type": "string" },
+          "first_appearance": { "type": "string" },
+          "state_changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "required": ["prop_id", "name"]
+      }
+    },
+    "asset_stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "characters": { "type": "integer", "minimum": 0 },
+        "locations": { "type": "integer", "minimum": 0 },
+        "props": { "type": "integer", "minimum": 0 },
+        "outfit_count": { "type": "integer", "minimum": 0 },
+        "state_change_points": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "required": ["characters", "locations", "props"]
+}
