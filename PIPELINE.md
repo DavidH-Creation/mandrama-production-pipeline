@@ -29,6 +29,14 @@ cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
 cp -r format-style-planner ~/.claude/skills/
 ```
 
+Windows PowerShell:
+
+```powershell
+Copy-Item format-style-planner, script-asset-breakdown, storyboard-shot-planner, `
+  model-prompt-adapter-jimeng, shot-qc-and-edit-assembler `
+  -Destination $HOME\.claude\skills\ -Recurse
+```
+
 ## 中间产物
 
 | 产物 | 产出方 | 消费方 |

@@ -1,10 +1,10 @@
 ---
 name: storyboard-shot-planner
 description: >-
-  将漫剧剧本和资产拆解为按集、按场、按镜头编排的分镜计划（shot-plan），
-  包含景别、构图、运镜、角色站位和情绪节奏。
-  当用户需要把剧本转成分镜脚本、规划每个镜头的画面内容、
-  或编排一集的视觉节奏时触发。
+  Convert a manhua-drama script and asset set into a storyboard-ready shot-plan with framing, composition,
+  camera movement, character blocking, and emotional pacing.
+  Use when turning a script into a shot-by-shot plan, planning visual beats for each scene,
+  or structuring the rhythm of an episode. 将剧本和资产拆解为按集、按场、按镜头编排的分镜计划。
 ---
 
 # Storyboard Shot Planner

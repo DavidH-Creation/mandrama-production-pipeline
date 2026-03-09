@@ -1,10 +1,11 @@
 ---
 name: format-style-planner
 description: >-
-  为漫剧项目确定视觉风格（2D/3D/真人仿真3D）、画幅比例（横屏/竖屏）、
-  目标平台适配和整体视觉方向，输出 project-spec。
-  当用户要启动新漫剧项目、决定画风方向、选择平台规格、
-  或讨论竖屏短剧 vs 横屏长剧的视觉策略时触发。
+  Plan the production format and visual direction for a manhua-drama project, including 2D vs 3D vs photoreal 3D,
+  horizontal vs vertical framing, target platform fit, and a final project-spec output.
+  Use when starting a new comic-drama project, deciding visual style direction, choosing platform specs,
+  or comparing vertical short-form vs horizontal long-form presentation. 为漫剧项目确定视觉风格、画幅比例、
+  平台适配和整体视觉方向，输出 project-spec。
 ---
 
 # Format & Style Planner

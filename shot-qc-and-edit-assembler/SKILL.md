@@ -1,10 +1,10 @@
 ---
 name: shot-qc-and-edit-assembler
 description: >-
-  检查 AI 生成的图像/视频是否符合分镜计划和剧情要求，
-  给出质检评分、重生成建议和剪辑合成指引，输出 qc-report。
-  当用户拿到生成结果需要审核质量、决定哪些镜头需要重新生成、
-  或需要剪辑顺序和转场建议时触发。
+  Review AI-generated images or video clips against the shot-plan and story intent, then produce qc-report
+  with quality scoring, regeneration guidance, and edit assembly recommendations.
+  Use when generated shots need approval, triage, fix notes, or post-production sequencing guidance.
+  检查 AI 生成结果是否符合分镜计划和剧情要求，并给出质检和剪辑建议。
 ---
 
 # Shot QC & Edit Assembler

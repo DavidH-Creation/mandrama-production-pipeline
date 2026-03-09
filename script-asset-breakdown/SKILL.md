@@ -1,10 +1,10 @@
 ---
 name: script-asset-breakdown
 description: >-
-  从漫剧剧本中系统提取人物、场景、道具、服装、表情状态等视觉资产，
-  生成 asset-bible 和 canonical-prompts。
-  当用户提供了剧本并需要拆解角色外观、场景设定、道具清单，
-  或需要为 AI 生图建立角色一致性描述时触发。
+  Break down a manhua-drama script into production assets including characters, scenes, props, costumes,
+  and recurring visual states, then output asset-bible and canonical-prompts.
+  Use when a user provides a script and needs structured visual asset extraction or consistency-ready descriptions
+  for AI image generation. 从漫剧剧本中系统提取视觉资产并生成 asset-bible 和 canonical-prompts。
 ---
 
 # Script Asset Breakdown

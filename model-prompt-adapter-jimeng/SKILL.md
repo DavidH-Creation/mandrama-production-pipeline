@@ -1,10 +1,10 @@
 ---
 name: model-prompt-adapter-jimeng
 description: >-
-  将分镜计划和资产描述转换为即梦（Jimeng/Dreamina）可直接使用的
-  图像和视频生成 prompt，输出 generation-brief。
-  当用户需要为即梦生成 prompt、调整即梦参数、
-  或批量生成即梦 API 调用格式时触发。
+  Adapt shot plans and canonical asset descriptions into Jimeng/Dreamina-ready prompts for image and video generation,
+  then output generation-brief.
+  Use when preparing prompts for Jimeng, tuning Jimeng parameters, or formatting prompts for batch API usage.
+  将分镜计划和资产描述转换为即梦可直接使用的图像和视频生成 prompt。
 ---
 
 # Model Prompt Adapter — 即梦
