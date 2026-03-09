@@ -36,6 +36,7 @@ description: >-
 | 生成结果 | 是 | 即梦生成的图像/视频（文件路径或截图描述） |
 | shot-plan | 是 | `storyboard-shot-planner` |
 | asset-bible | 是 | `script-asset-breakdown` |
+| consistency-report | 建议 | `consistency-keeper`（用于提前发现跨镜头一致性问题） |
 | generation-brief | 建议 | `model-prompt-adapter-jimeng`（用于给出 prompt 修改建议） |
 
 ## 输出
@@ -52,6 +53,8 @@ description: >-
 - 情绪匹配度（色调/光影/表情是否传达正确情绪）
 - 技术质量（畸变、伪影、多余肢体、文字水印等）
 - 叙事连贯性（与前后镜头的衔接是否合理）
+
+如有 `consistency-report`，先读取其中的高优先级问题组，把这些镜头作为重点审查对象。
 
 ### Step 2 — 逐镜头审查
 
