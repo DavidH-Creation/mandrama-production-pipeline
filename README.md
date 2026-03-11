@@ -1,5 +1,13 @@
 # mandrama-production-pipeline
 
+> Modular production workflow skill pack for AI-assisted manhua-drama creation.
+
+## 导览 / Overview
+
+- 中文说明见下方 `中文`
+- English documentation starts at `English`
+- 核心目录：各 skill 文件夹、`schemas/`、`PIPELINE.md`
+
 ## 中文
 
 一个面向 AI 辅助漫剧制作流程的七段式模块化 skill 仓库。
@@ -45,11 +53,35 @@ PIPELINE.md
 
 仓库还包含 `schemas/`，用于对主要中间产物做机器可读的结构校验。
 
-### 安装
+### 安装方式
 
-把一个或多个 skill 文件夹复制到你的本地 skills 目录即可。
+#### Codex
 
-#### macOS / Linux
+先克隆仓库：
+
+```bash
+git clone https://github.com/DavidH-Creation/mandrama-production-pipeline.git
+```
+
+再把一个或多个 skill 文件夹复制到你的本地 Codex skills 目录：
+
+```bash
+cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
+      model-prompt-adapter-jimeng consistency-keeper shot-qc-and-edit-assembler \
+      regeneration-router ~/.codex/skills/
+```
+
+#### Claude Code
+
+先克隆仓库：
+
+```bash
+git clone https://github.com/DavidH-Creation/mandrama-production-pipeline.git
+```
+
+再把一个或多个 skill 文件夹复制到你的本地 Claude Code skills 目录。
+
+##### macOS / Linux
 
 ```bash
 cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
@@ -57,7 +89,7 @@ cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
       regeneration-router ~/.claude/skills/
 ```
 
-#### Windows PowerShell
+##### Windows PowerShell
 
 ```powershell
 Copy-Item format-style-planner, script-asset-breakdown, storyboard-shot-planner, `
@@ -111,7 +143,7 @@ This repo is a **production workflow skill pack**, not a single monolithic skill
 - A closed repair loop for continuity drift and targeted regeneration
 - JSON Schema definitions for the shared pipeline artifacts
 
-### Repo Structure
+### Repository Structure
 
 ```text
 format-style-planner/
@@ -135,9 +167,33 @@ The repo also includes `schemas/` with JSON Schema files for machine-readable va
 
 ### Installation
 
-Copy one or more skill folders into your local skills directory.
+#### Codex
 
-#### macOS / Linux
+Clone the repo first:
+
+```bash
+git clone https://github.com/DavidH-Creation/mandrama-production-pipeline.git
+```
+
+Then copy one or more skill folders into your local Codex skills directory:
+
+```bash
+cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
+      model-prompt-adapter-jimeng consistency-keeper shot-qc-and-edit-assembler \
+      regeneration-router ~/.codex/skills/
+```
+
+#### Claude Code
+
+Clone the repo first:
+
+```bash
+git clone https://github.com/DavidH-Creation/mandrama-production-pipeline.git
+```
+
+Then copy one or more skill folders into your local Claude Code skills directory.
+
+##### macOS / Linux
 
 ```bash
 cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
@@ -145,7 +201,7 @@ cp -r format-style-planner script-asset-breakdown storyboard-shot-planner \
       regeneration-router ~/.claude/skills/
 ```
 
-#### Windows PowerShell
+##### Windows PowerShell
 
 ```powershell
 Copy-Item format-style-planner, script-asset-breakdown, storyboard-shot-planner, `
